@@ -9,8 +9,8 @@ import java.util.Scanner;
 public class MainRepository {
 
     private static final String DB_USERNAME = "postgres";
-    private static final String DB_PASSWORD = "gjhfqr102";
-    private static final String DB_URL = "jdbc:postgresql://localhost:5432/testdb_3";
+    private static final String DB_PASSWORD = "123";
+    private static final String DB_URL = "jdbc:postgresql://localhost:5432/postgres";
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws Exception {
@@ -33,9 +33,9 @@ public class MainRepository {
             int age = scanner.nextInt();
             String email = scanner.nextLine();
             String phoneNumber = scanner.nextLine();
-            String address = scanner.nextLine();
+            String height = scanner.nextLine();
 
-            User currenUser = new User(id, firstName, lastName, age, email, phoneNumber, address);
+            User currenUser = new User(id, firstName, lastName, age, email, phoneNumber, height);
             usersList.add(currenUser);
         }
 

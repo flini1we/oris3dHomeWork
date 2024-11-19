@@ -6,7 +6,7 @@ public class User {
     private final Integer age;
     private final String email;
     private final String phoneNumber;
-    private final String address;
+    private final String height;
 
     public User(Long id,
                 String firstName,
@@ -14,7 +14,7 @@ public class User {
                 Integer age,
                 String email,
                 String phoneNumber,
-                String address
+                String height
     ) {
         this.id = id;
         this.firstName = firstName;
@@ -22,7 +22,7 @@ public class User {
         this.age = age;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.address = address;
+        this.height = height;
     }
 
     public Long getId() {
@@ -49,7 +49,7 @@ public class User {
         return phoneNumber;
     }
 
-    public String getAddress() {
-        return address;
+    public String getHeight() {
+        return height;
     }
 }

@@ -11,6 +11,7 @@ public class UsersRepositoryJdbcImpl implements UserRepository {
     private static final String SQL_UPDATE_USER = "UPDATE driver SET first_name = ?, last_name = ?, age = ?, email = ?, phone_number = ?, address = ? WHERE id = ?";
     private static final String SQL_DELETE_USER = "DELETE FROM driver WHERE id = ?";
     private static final String SQL_SELECT_USER_BY_AGE = "SELECT * FROM driver WHERE age = ?";
+    private static final String SQL_SELECT_USER_BY_HEIGHT = "SELECT * FROM driver WHERE height = ?";
     private static final String SQL_SELECT_USER_BY_EMAIL = "SELECT * FROM driver WHERE email = ?";
     private static final String SQL_SELECT_USER_BY_PHONE_NUMBER = "SELECT * FROM driver WHERE phone_number = ?";
 
@@ -31,7 +32,7 @@ public class UsersRepositoryJdbcImpl implements UserRepository {
                     resultSet.getString("first_name"),
                     resultSet.getString("last_name"),
                     resultSet.getInt("age"),
-                    resultSet.getString("email"),
+                    resultSet.getString("height"),
                     resultSet.getString("phone_number"),
                     resultSet.getString("address"));
             result.add(user);
@@ -52,7 +53,7 @@ public class UsersRepositoryJdbcImpl implements UserRepository {
         statement.setInt(3, entity.getAge());
         statement.setString(4, entity.getEmail());
         statement.setString(5, entity.getPhoneNumber());
-        statement.setString(6, entity.getAddress());
+        statement.setString(6, entity.getHeight());
         var addedUsers = statement.executeUpdate();
         System.out.println("Было добавлено" + addedUsers + "юзера");
     }
@@ -65,7 +66,7 @@ public class UsersRepositoryJdbcImpl implements UserRepository {
         statement.setInt(3, entity.getAge());
         statement.setString(4, entity.getEmail());
         statement.setString(5, entity.getPhoneNumber());
-        statement.setString(6, entity.getAddress());
+        statement.setString(6, entity.getHeight());
         statement.setLong(7, entity.getId());
     }
 
@@ -94,7 +95,28 @@ public class UsersRepositoryJdbcImpl implements UserRepository {
                     resultSet.getInt("age"),
                     resultSet.getString("email"),
                     resultSet.getString("phone_number"),
-                    resultSet.getString("address")
+                    resultSet.getString("height")
+            );
+            result.add(user);
+        }
+        return result;
+    }
+
+    @Override
+    public List<User> findAllByHeight(Integer height) throws SQLException {
+        List<User> result = new ArrayList<>();
+        PreparedStatement statement = connection.prepareStatement(SQL_SELECT_USER_BY_HEIGHT);
+        statement.setInt(1, height);
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            User user = new User(
+                    resultSet.getLong("id"),
+                    resultSet.getString("first_name"),
+                    resultSet.getString("last_name"),
+                    resultSet.getInt("age"),
+                    resultSet.getString("email"),
+                    resultSet.getString("phone_number"),
+                    resultSet.getString("height")
             );
             result.add(user);
         }
@@ -120,7 +142,7 @@ public class UsersRepositoryJdbcImpl implements UserRepository {
             statement.setInt(index * 6 +  3, user.getAge());
             statement.setString(index * 6 +  4, user.getEmail());
             statement.setString(index * 6 +  5, user.getPhoneNumber());
-            statement.setString(index * 6 + 6, user.getAddress());
+            statement.setString(index * 6 + 6, user.getHeight());
             index++;
         }
         return SQL_INSERT_MULTIPLE_USERS;
