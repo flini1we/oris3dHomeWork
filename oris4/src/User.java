@@ -3,7 +3,7 @@ public class User {
     private final Long id;
     private final String firstName;
     private final String lastName;
-    private final Integer age;
+    private final int age;
     private final String email;
     private final String phoneNumber;
     private final String height;
@@ -11,7 +11,7 @@ public class User {
     public User(Long id,
                 String firstName,
                 String lastName,
-                Integer age,
+                int age,
                 String email,
                 String phoneNumber,
                 String height
@@ -37,7 +37,7 @@ public class User {
         return lastName;
     }
 
-    public Integer getAge() {
+    public int getAge() {
         return age;
     }
 
